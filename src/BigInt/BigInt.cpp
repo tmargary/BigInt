@@ -101,8 +101,7 @@ BigInt BigInt::operator++(int /* tmp */)
 
 BigInt& BigInt::operator--()
 {
-	string one = "1";
-	digits = addBigInt(digits, one);
+	digits = addBigInt(digits, string("1"));
     return *this;
 }
 
@@ -141,7 +140,7 @@ BigInt operator-(BigInt lhs, const BigInt& rhs)
 
 BigInt& BigInt::operator*=(const BigInt& rhs)
 {
-	// TODO
+	digits = multiplyBigInt(digits, rhs.digits);
     return *this;
 }
 
@@ -153,7 +152,7 @@ BigInt operator*(BigInt lhs, const BigInt& rhs)
 
 BigInt& BigInt::operator/=(const BigInt& rhs)
 {
-	// TODO
+	digits = divideBigInt(digits, rhs.digits);
     return *this;
 }
 
@@ -165,7 +164,7 @@ BigInt operator/(BigInt lhs, const BigInt& rhs)
 
 BigInt& BigInt::operator%=(const BigInt& rhs)
 {
-	// TODO
+	digits = modBigInt(digits, rhs.digits);
     return *this;
 }
 

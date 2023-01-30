@@ -25,8 +25,8 @@ int main()
 
     BigInt fifth = (first + second);
     BigInt sixth = (1 + second);
-    BigInt seventh(string("12345"));
-    seventh += first;
+    BigInt seventh(string("25"));
+    seventh %= string("4");
 
 
 	cout << 
@@ -37,8 +37,7 @@ int main()
     "fifth = " << fifth << endl << 
     "sixth = " << sixth << endl <<
     "seventh = " << seventh << endl << 
-    endl
-    ;
+    endl;
 
     return 0;
 }
