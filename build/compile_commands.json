@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/home/tigran/Documents/_current/BigInt/build/src",
+  "command": "/usr/bin/g++  -I/home/tigran/Documents/_current/BigInt/src/BigInt/include -I/home/tigran/Documents/_current/BigInt/src/utils/include -g -std=c++17 -o CMakeFiles/main.dir/main.cpp.o -c /home/tigran/Documents/_current/BigInt/src/main.cpp",
+  "file": "/home/tigran/Documents/_current/BigInt/src/main.cpp"
+},
+{
+  "directory": "/home/tigran/Documents/_current/BigInt/build/src/BigInt",
+  "command": "/usr/bin/g++  -I/home/tigran/Documents/_current/BigInt/src/BigInt/include -I/home/tigran/Documents/_current/BigInt/src/utils/include -g -std=c++17 -o CMakeFiles/BigInt.dir/BigInt.cpp.o -c /home/tigran/Documents/_current/BigInt/src/BigInt/BigInt.cpp",
+  "file": "/home/tigran/Documents/_current/BigInt/src/BigInt/BigInt.cpp"
+},
+{
+  "directory": "/home/tigran/Documents/_current/BigInt/build/src/utils",
+  "command": "/usr/bin/g++  -I/home/tigran/Documents/_current/BigInt/src/utils/include -g -std=c++17 -o CMakeFiles/utils.dir/utils.cpp.o -c /home/tigran/Documents/_current/BigInt/src/utils/utils.cpp",
+  "file": "/home/tigran/Documents/_current/BigInt/src/utils/utils.cpp"
+},
+{
+  "directory": "/home/tigran/Documents/_current/BigInt/build/tests",
+  "command": "/usr/bin/g++  -I/home/tigran/Documents/_current/BigInt/src/BigInt/include -I/home/tigran/Documents/_current/BigInt/src/utils/include -isystem /home/tigran/Documents/_current/BigInt/build/vcpkg_installed/x64-linux/include -g -std=c++17 -o CMakeFiles/BigIntTest.dir/BigIntTest.cpp.o -c /home/tigran/Documents/_current/BigInt/tests/BigIntTest.cpp",
+  "file": "/home/tigran/Documents/_current/BigInt/tests/BigIntTest.cpp"
+}
+]

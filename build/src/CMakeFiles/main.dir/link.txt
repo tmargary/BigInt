@@ -1,0 +1,1 @@
+/usr/bin/g++ -g CMakeFiles/main.dir/main.cpp.o -o main  BigInt/libBigInt.a utils/libutils.a 

@@ -1,0 +1,1 @@
+/usr/bin/g++ -g CMakeFiles/BigIntTest.dir/BigIntTest.cpp.o -o BigIntTest  ../src/BigInt/libBigInt.a ../vcpkg_installed/x64-linux/debug/lib/libgtestd.a ../src/utils/libutils.a 

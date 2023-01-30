@@ -1,0 +1,32 @@
+Detecting compiler hash for triplet x64-linux...
+The following packages will be built and installed:
+    fmt[core]:x64-linux -> 8.1.1#1 -- /home/tigran/vcpkg/buildtrees/versioning_/versions/fmt/602d9743b7957c9e82a06d0e81d58637c6df5222
+    gtest[core]:x64-linux -> 1.11.0#3 -- /home/tigran/vcpkg/buildtrees/versioning_/versions/gtest/bc195b45d4d766498fb51de96427835c7c4d5748
+  * vcpkg-cmake[core]:x64-linux -> 2022-01-19 -- /home/tigran/vcpkg/buildtrees/versioning_/versions/vcpkg-cmake/b7c050fe60f91dcedef6d87a3f87584151bf8aee
+  * vcpkg-cmake-config[core]:x64-linux -> 2022-02-06 -- /home/tigran/vcpkg/buildtrees/versioning_/versions/vcpkg-cmake-config/24dc7dfc704406e9f745f033643dc25f56e4ca18
+Additional packages (*) will be modified to complete this operation.
+Restored 4 package(s) from /home/tigran/.cache/vcpkg/archives in 55.73 ms. Use --debug to see more details.
+Installing 1/4 vcpkg-cmake-config:x64-linux...
+Elapsed time to handle vcpkg-cmake-config:x64-linux: 675.1 us
+Installing 2/4 vcpkg-cmake:x64-linux...
+Elapsed time to handle vcpkg-cmake:x64-linux: 741.1 us
+Installing 3/4 fmt:x64-linux...
+Elapsed time to handle fmt:x64-linux: 2.244 ms
+Installing 4/4 gtest:x64-linux...
+Elapsed time to handle gtest:x64-linux: 6.598 ms
+Total install time: 66.03 ms
+The package fmt provides CMake targets:
+
+    find_package(fmt CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE fmt::fmt)
+
+    # Or use the header-only version
+    find_package(fmt CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE fmt::fmt-header-only)
+
+gtest provides CMake targets:
+
+    # this is heuristically generated, and may not be correct
+    find_package(GTest CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE GTest::gmock GTest::gtest GTest::gmock_main GTest::gtest_main)
+

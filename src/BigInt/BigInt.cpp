@@ -2,22 +2,25 @@
 
 #include <iostream>
 #include <vector>
+#include <exception>
 
 using namespace std;
+
+#include <utils.h>
 
 namespace ACA
 {
 
 BigInt::BigInt(const string& s)
 {
-	digits = s; // No checks at all, risky
-	// TODO
+	if (!(isNumber(s))){
+		throw std::runtime_error("Input must be a number.");
+	} else {
+		digits = s;
+	}
 }
 
-BigInt::BigInt(unsigned long long nr)
-{
-	// TODO
-}
+BigInt::BigInt(unsigned long long nr){}
 
 BigInt::BigInt(const BigInt& other)
 {
@@ -77,7 +80,8 @@ bool operator<=(const BigInt& lhs, const BigInt& rhs)
 
 BigInt& BigInt::operator++()
 {
-	// TODO
+	string one = "1";
+	digits = addBigInt(digits, one);
     return *this;
 }
 
@@ -90,7 +94,8 @@ BigInt BigInt::operator++(int /* tmp */)
 
 BigInt& BigInt::operator--()
 {
-	// TODO
+	string one = "1";
+	digits = addBigInt(digits, one);
     return *this;
 }
 
