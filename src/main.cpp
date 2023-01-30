@@ -36,7 +36,7 @@ int main()
     "forth = " << forth << endl << 
     "fifth = " << fifth << endl << 
     "sixth = " << sixth << endl <<
-    "seventh = " << seventh << endl << 
+    "seventh = " << (seventh <= first) << endl << 
     endl;
 
     return 0;

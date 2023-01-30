@@ -62,13 +62,7 @@ bool operator!=(const BigInt& lhs, const BigInt& rhs)
 
 bool operator<(const BigInt& lhs, const BigInt& rhs)
 {
-	int n = lhs.digits.size(), m = rhs.digits.size();
-    if(n != m)
-        return n < m;
-    while(n--)
-        if(lhs.digits[n] != rhs.digits[n])
-            return lhs.digits[n] < rhs.digits[n];
-    return true;
+	return compareBigInt(lhs.digits, rhs.digits) == -1;
 }
 
 bool operator>(const BigInt& lhs, const BigInt& rhs)

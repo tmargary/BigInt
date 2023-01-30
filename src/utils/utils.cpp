@@ -174,8 +174,6 @@ std::string divideBigInt(std::string dividend, std::string divisor) {
     return quotient;
 }
 
-
-
 std::string modBigInt(std::string a, std::string b)
 {
   std::string quotient = divideBigInt(a, b);
