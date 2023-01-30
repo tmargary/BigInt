@@ -2,6 +2,7 @@
 #include <string>
 #include <cctype>
 #include <algorithm>
+using namespace std;
 
 bool isNumber(const std::string &str)
 {
@@ -113,3 +114,79 @@ std::string subtractBigInt(const std::string &a, const std::string &b)
     std::reverse(result.begin(), result.end());
     return result;
 }
+
+std::string multiplyBigInt(const std::string &a, const std::string &b)
+{
+    std::vector<int> result(a.size() + b.size(), 0);
+
+    for (int i = a.size() - 1; i >= 0; i--)
+    {
+        for (int j = b.size() - 1; j >= 0; j--)
+        {
+            int a_digit = a[i] - '0';
+            int b_digit = b[j] - '0';
+            result[i + j + 1] += a_digit * b_digit;
+            result[i + j] += result[i + j + 1] / 10;
+            result[i + j + 1] %= 10;
+        }
+    }
+
+    int non_zero = 0;
+    while (non_zero < result.size() - 1 && result[non_zero] == 0)
+    {
+        non_zero++;
+    }
+
+    std::string str;
+    for (int i = non_zero; i < result.size(); i++)
+    {
+        str += (char)(result[i] + '0');
+    }
+
+    return str;
+}
+
+std::string divideBigInt(std::string dividend, std::string divisor) {
+  std::string quotient;
+  int dividendLength = dividend.length();
+  int divisorLength = divisor.length();
+  std::string currentDividend = "";
+
+  for (int i = 0; i < dividendLength; i++) {
+    currentDividend += dividend[i];
+    int currentQuotient = 0;
+    while (currentDividend.length() >= divisorLength || (currentDividend.length() > 1 && currentDividend[0] != '0')) {
+      int j = 0;
+      while (j < divisorLength && (currentDividend[j] - '0') >= (divisor[j] - '0')) {
+        j++;
+      }
+      if (j == divisorLength) {
+        currentQuotient++;
+        std::string tempDividend = "";
+        int carry = 0;
+        for (int k = 0; k < currentDividend.length(); k++) {
+          int difference = (currentDividend[k] - '0') - (divisor[k] - '0') - carry;
+          if (difference < 0) {
+            carry = 1;
+            difference += 10;
+          } else {
+            carry = 0;
+          }
+          tempDividend += (char)(difference + '0');
+        }
+        currentDividend = tempDividend;
+        while (currentDividend.length() > 1 && currentDividend[0] == '0') {
+          currentDividend = currentDividend.substr(1);
+        }
+      } else {
+        break;
+      }
+    }
+    quotient += (char)(currentQuotient + '0');
+  }
+  while (quotient.length() > 1 && quotient[0] == '0') {
+    quotient = quotient.substr(1);
+  }
+  return quotient;
+}
+
