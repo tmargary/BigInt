@@ -20,7 +20,10 @@ BigInt::BigInt(const string& s)
 	}
 }
 
-BigInt::BigInt(unsigned long long nr){}
+BigInt::BigInt(unsigned long long nr)
+{
+	digits = std::to_string(nr);
+}
 
 BigInt::BigInt(const BigInt& other)
 {
@@ -34,7 +37,7 @@ BigInt& BigInt::operator=(const BigInt& other)
     {
         return *this;
     }
-	// TODO:
+	digits = other.digits;
     return *this;
 }
 
@@ -59,7 +62,12 @@ bool operator!=(const BigInt& lhs, const BigInt& rhs)
 
 bool operator<(const BigInt& lhs, const BigInt& rhs)
 {
-	// TODO
+	int n = lhs.digits.size(), m = rhs.digits.size();
+    if(n != m)
+        return n < m;
+    while(n--)
+        if(lhs.digits[n] != rhs.digits[n])
+            return lhs.digits[n] < rhs.digits[n];
     return true;
 }
 
@@ -80,8 +88,7 @@ bool operator<=(const BigInt& lhs, const BigInt& rhs)
 
 BigInt& BigInt::operator++()
 {
-	string one = "1";
-	digits = addBigInt(digits, one);
+	digits = addBigInt(digits, string("1"));
     return *this;
 }
 
@@ -108,7 +115,8 @@ BigInt BigInt::operator--(int /* tmp */)
 
 BigInt& BigInt::operator+=(const BigInt& rhs)
 {
-	// TODO
+	string other = rhs.toString();
+	digits = addBigInt(digits, other);
     return *this;
 }
 
@@ -120,7 +128,8 @@ BigInt operator+(BigInt lhs, const BigInt& rhs)
 
 BigInt& BigInt::operator-=(const BigInt& rhs)
 {
-	// TODO
+	string other = rhs.toString();
+	digits = subtractBigInt(digits, other);
     return *this;
 }
 

@@ -9,29 +9,36 @@ int main()
 {
 
     BigInt first(string("12345"));
-    first++;
-    std::cout << first.toString() << std::endl;
+    BigInt second(12934);
+    BigInt third(second);
+    BigInt forth = third;
 
-	// BigInt first(string("12345"));
-    // BigInt second(12934);
+    second = first;
 
-    // BigInt third(second);
-    // BigInt forth = third;
+    cout << "first and second are ";
+    if (first != second) 
+    {
+        cout << "not equal!\n";
+    } else {
+        cout << "equal!\n";
+    }
 
-    // second = first;
-
-    // if (first != second) 
-    // {
-    //     // cout
-    // }
-
-    // BigInt fifth = (first + second);
-    // BigInt sixth = (1 + second);
+    BigInt fifth = (first + second);
+    BigInt sixth = (1 + second);
+    BigInt seventh(string("12345"));
+    seventh += first;
 
 
-	// cout << "first = " << first << " second = " << second 
-    // << " third = " << third << " forth = " << forth 
-    // << " fifth = " << fifth << " sixth = " << sixth;
+	cout << 
+    "first = " << first << endl << 
+    "second = " << second << endl << 
+    "third = " << third << endl << 
+    "forth = " << forth << endl << 
+    "fifth = " << fifth << endl << 
+    "sixth = " << sixth << endl <<
+    "seventh = " << seventh << endl << 
+    endl
+    ;
 
     return 0;
 }
