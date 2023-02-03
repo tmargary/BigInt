@@ -14,16 +14,16 @@ int main()
     std::string expected;
     
     BigInt a("123456789");
-    BigInt b("987654321");
+    BigInt b("-987654321");
 
     result = (a * b).toString();
-    expected = "121932631112635269";
+    expected = "-121932631112635269";
 
     if(result==expected){
         std::cout << "Success!" << std::endl;
     }
 
-    /* std::vector<long long> vec{10, -45254, 7575, 24221};
+    std::vector<long long> vec{10, -45254, 7575, 24221};
 
     for (auto el1 : vec)
     {
@@ -62,7 +62,30 @@ int main()
             expected = std::to_string(a);
             std::cout <<  el1 << "^" << el2 << " = " << result << " \t\t expected: " << expected << std::endl;
         }
-    } */
+    }
+
+    // Mher's requirements:
+
+    BigInt first(std::string("12345"));
+    BigInt second(12934);
+
+    BigInt third(second);
+    BigInt forth = third;
+
+    second = first;
+
+    if (first != second) 
+    {
+        std::cout << "OH NO! Somwthing went wrong!";
+    }
+
+    BigInt fifth = (first + second);
+    BigInt sixth = (1 + second);
+
+
+	std::cout << "first = " << first << " second = " << second 
+    << " third = " << third << " forth = " << forth 
+    << " fifth = " << fifth << " sixth = " << sixth << std::endl;
 
     return 0;
 }

@@ -11,6 +11,6 @@
 # Usage
 ```
 BigInt a("123456789");
-BigInt b("987654321");
-result = (a * b).toString(); // "121932631112635269"
+BigInt b("-987654321");
+result = (a * b).toString(); // "-121932631112635269"
 ```
