@@ -13,6 +13,10 @@ bool isNumber(const std::string &str)
   if (*it == '+' || *it == '-')
     it++;
 
+  if (*it == '0' && str.size() != 1){
+    return false;
+  }
+
   // Check for digits before decimal point
   bool hasDigits = false;
   while (std::isdigit(*it))

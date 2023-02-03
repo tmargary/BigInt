@@ -8,8 +8,8 @@ using namespace std;
 
 TEST(BigInt, IsNumber)
 {
-    EXPECT_THROW({BigInt('123a') / BigInt(0);}, std::runtime_error);
-    EXPECT_THROW({BigInt('0123') / BigInt(0);}, std::runtime_error);
+    EXPECT_THROW({BigInt("123a");}, std::runtime_error);
+    EXPECT_THROW({BigInt("0123");}, std::runtime_error);
 }
 
 TEST(BigInt, Increment)
