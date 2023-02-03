@@ -10,7 +10,7 @@ class BigInt
 {
 
 public:
-	BigInt(unsigned long long n = 0);
+	BigInt(long long n = 0);
 	BigInt(const std::string&);
 	BigInt(const BigInt&);
 

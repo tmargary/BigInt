@@ -3,8 +3,7 @@
 #include <cctype>
 #include <algorithm>
 #include <cmath>
-
-using namespace std;
+#include <vector>
 
 bool isNumber(const std::string &str)
 {
@@ -55,18 +54,29 @@ bool isNumber(const std::string &str)
   return hasDigits && it == str.end();
 }
 
-int compareBigInt(const std::string &a, const std::string &b) {
-  if (a.length() < b.length()) return -1;
-  if (a.length() > b.length()) return 1;
-  for (int i = 0; i < a.length(); ++i) {
-    if (a[i] < b[i]) return -1;
-    if (a[i] > b[i]) return 1;
+int compareBigInt(const std::string &a, const std::string &b)
+{
+  if (a.length() < b.length())
+    return -1;
+  if (a.length() > b.length())
+    return 1;
+  for (int i = 0; i < a.length(); ++i)
+  {
+    if (a[i] < b[i])
+      return -1;
+    if (a[i] > b[i])
+      return 1;
   }
   return 0;
 }
 
-std::string addBigInt(const std::string &a, const std::string &b)
+std::string baseAddBigInt(std::string a, std::string b)
 {
+  if ((a[0] == '-') || b[0] == '-')
+  {
+    throw std::runtime_error("Input cannot be negative.");
+  }
+
   std::string result;
   int carry = 0;
 
@@ -92,7 +102,7 @@ std::string addBigInt(const std::string &a, const std::string &b)
   return result;
 }
 
-std::string subtractBigInt(const std::string &a, const std::string &b)
+std::string baseSubtractBigInt(std::string a, std::string b)
 {
   std::string result;
   int borrow = 0;
@@ -100,6 +110,15 @@ std::string subtractBigInt(const std::string &a, const std::string &b)
   int lenA = a.length();
   int lenB = b.length();
   int maxLen = std::max(lenA, lenB);
+
+  bool negative = false;
+  if (lenA < lenB || (lenA == lenB && a < b))
+  {
+    negative = true;
+    std::swap(a, b);
+    lenA = a.length();
+    lenB = b.length();
+  }
 
   for (int i = 0; i < maxLen; i++)
   {
@@ -124,10 +143,16 @@ std::string subtractBigInt(const std::string &a, const std::string &b)
   }
 
   std::reverse(result.begin(), result.end());
+
+  if (negative)
+  {
+    result = '-' + result;
+  }
+
   return result;
 }
 
-std::string multiplyBigInt(const std::string &a, const std::string &b)
+std::string baseMultiplyBigInt(std::string a, std::string b)
 {
   std::vector<int> result(a.size() + b.size(), 0);
 
@@ -158,20 +183,146 @@ std::string multiplyBigInt(const std::string &a, const std::string &b)
   return str;
 }
 
-std::string divideBigInt(std::string dividend, std::string divisor) {
-    int n = dividend.size(), m = divisor.size();
-    if (n < m) return "0";
-    int sign = ((dividend[0] == '-' && divisor[0] == '-') || (dividend[0] != '-' && divisor[0] != '-')) ? 1 : -1;
-    if (dividend[0] == '-') dividend = dividend.substr(1);
-    if (divisor[0] == '-') divisor = divisor.substr(1);
-    int count = 0;
-    while (compareBigInt(dividend, divisor) >= 0) {
-        count++;
-        dividend = subtractBigInt(dividend, divisor);
+std::string subtractBigInt(std::string a, std::string b)
+{
+  std::string result;
+  bool isNegative = false;
+
+  if ((a[0] == '-' && b[0] != '-') || (b[0] == '-' && a[0] != '-'))
+  {
+    if (a[0] == '-')
+    {
+      result = baseAddBigInt(a.substr(1), b);
+      result.insert(0, "-");
     }
-    std::string quotient = std::to_string(count);
-    if (sign == -1) quotient = "-" + quotient;
-    return quotient;
+    else
+    {
+      result = baseAddBigInt(a, b.substr(1));
+    }
+  }
+  else if (a[0] == '-' && b[0] == '-')
+  {
+    result = baseSubtractBigInt(b.substr(1), a.substr(1));
+  }
+  else
+  {
+    result = baseSubtractBigInt(a, b);
+  }
+  return result;
+}
+
+std::string baseDivideBigInt(std::string dividend, std::string divisor)
+{
+  int n = dividend.size(), m = divisor.size();
+  if (n < m)
+    return "0";
+  if (divisor == "0"){
+    throw std::runtime_error("Input must be a number.");
+  }
+  int sign = ((dividend[0] == '-' && divisor[0] == '-') || (dividend[0] != '-' && divisor[0] != '-')) ? 1 : -1;
+  if (dividend[0] == '-')
+    dividend = dividend.substr(1);
+  if (divisor[0] == '-')
+    divisor = divisor.substr(1);
+  int count = 0;
+  while (compareBigInt(dividend, divisor) >= 0)
+  {
+    count++;
+    dividend = subtractBigInt(dividend, divisor);
+  }
+  std::string quotient = std::to_string(count);
+  if (sign == -1)
+    quotient = "-" + quotient;
+  return quotient;
+}
+
+std::string addBigInt(std::string a, std::string b)
+{
+  
+  std::string result;
+
+  if ((a[0] == '-' && b[0] != '-') || (b[0] == '-' && a[0] != '-'))
+  {
+    if (a[0] == '-')
+    {
+      result = baseSubtractBigInt(b, a.substr(1));
+    }
+    else
+    {
+      result = baseSubtractBigInt(a, b.substr(1));
+    }
+  }
+  else if (a[0] == '-' && b[0] == '-')
+  {
+    result = baseAddBigInt(a.substr(1), b.substr(1));
+    result.insert(0, "-");
+  }
+  else
+  {
+    result = baseAddBigInt(a, b);
+  }
+  return result;
+}
+
+std::string multiplyBigInt(std::string a, std::string b)
+{
+  std::string result;
+
+  if ((a[0] == '-' && b[0] != '-') || (b[0] == '-' && a[0] != '-'))
+  {
+    if (a[0] == '-')
+    {
+      result = baseMultiplyBigInt(b, a.substr(1));
+    }
+    else
+    {
+      result = baseMultiplyBigInt(a, b.substr(1));
+    }
+    if (result != "0") result.insert(0, "-");
+  }
+  else if (a[0] == '-' && b[0] == '-')
+  {
+    result = baseMultiplyBigInt(a.substr(1), b.substr(1));
+  }
+  else
+  {
+    result = baseMultiplyBigInt(a, b);
+  }
+  return result;
+}
+
+std::string divideBigInt(std::string a, std::string b)
+{
+  std::string result;
+
+  if ((a[0] == '-' && b[0] != '-') || (b[0] == '-' && a[0] != '-'))
+  {
+    if (a[0] == '-')
+    {
+      if (compareBigInt(a.substr(1), b) >= 0){
+        result = baseDivideBigInt(a.substr(1), b);
+      }
+      else{
+        result = '0';
+      }
+    }
+    else
+    {
+      result = baseDivideBigInt(a, b.substr(1));
+    }
+    if (result != "0"){
+      result.insert(0, "-");
+    }
+  }
+  else if (a[0] == '-' && b[0] == '-')
+  {
+    result = baseDivideBigInt(a.substr(1), b.substr(1));
+  }
+  else
+  {
+    result = baseDivideBigInt(a, b);
+  }
+  return result;
 }
 
 std::string modBigInt(std::string a, std::string b)
@@ -179,4 +330,3 @@ std::string modBigInt(std::string a, std::string b)
   std::string quotient = divideBigInt(a, b);
   return subtractBigInt(a, multiplyBigInt(quotient, b));
 }
-

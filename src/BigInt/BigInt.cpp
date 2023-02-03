@@ -20,7 +20,7 @@ BigInt::BigInt(const string& s)
 	}
 }
 
-BigInt::BigInt(unsigned long long nr)
+BigInt::BigInt(long long nr)
 {
 	digits = std::to_string(nr);
 }
@@ -95,7 +95,7 @@ BigInt BigInt::operator++(int /* tmp */)
 
 BigInt& BigInt::operator--()
 {
-	digits = addBigInt(digits, string("1"));
+	digits = subtractBigInt(digits, string("1"));
     return *this;
 }
 
@@ -170,7 +170,11 @@ BigInt operator%(BigInt lhs, const BigInt& rhs)
 
 BigInt& BigInt::operator^=(const BigInt& rhs)
 {
-	// TODO
+	BigInt result("1");
+    for (int i = 0; i < rhs.digits; i++) {
+        result *= *this;
+    }
+    *this = result;
     return *this;
 }
 
@@ -182,7 +186,9 @@ BigInt operator^(BigInt lhs, const BigInt& rhs)
 
 istream& operator>>(istream& in, BigInt& a)
 {
-    // TODO
+    string str;
+    in >> str;
+    a = str;
     return in;
 }
 

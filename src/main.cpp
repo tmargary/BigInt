@@ -1,44 +1,61 @@
 #include <BigInt/BigInt.h>
 
 #include <iostream>
+#include <vector>
+#include <assert.h>
+#include <cmath>
+#include <string>
 
 using namespace ACA;
-using namespace std;
 
 int main()
 {
 
-    BigInt first(string("12345"));
-    BigInt second(12934);
-    BigInt third(second);
-    BigInt forth = third;
+    long long a_ = 10, b_ = -45254, c_ = 7575, d_ = 24221;
 
-    second = first;
+    std::vector<long long> vec{a_, b_, c_, d_};
 
-    cout << "first and second are ";
-    if (first != second) 
+    std::string result;
+    std::string expected;
+
+    for (auto el1 : vec)
     {
-        cout << "not equal!\n";
-    } else {
-        cout << "equal!\n";
+        for (auto el2 : vec)
+        {
+            result = (BigInt(el1) - BigInt(el2)).toString();
+            expected = std::to_string((el1 - el2));
+            std::cout <<  el1 << " - " << el2 << " = " << result << " \t\t expected: " << expected << std::endl;
+            assert(result == expected);
+
+            result = (BigInt(el1) + BigInt(el2)).toString();
+            expected = std::to_string((el1 + el2));
+            std::cout <<  el1 << " + " << el2 << " = " << result << " \t\t expected: " << expected << std::endl;
+            assert(result == expected);
+
+            result = (BigInt(el1) * BigInt(el2)).toString();
+            expected = std::to_string((el1 * el2));
+            std::cout <<  el1 << " * " << el2 << " = " << result << " \t\t expected: " << expected << std::endl;
+            assert(result == expected);
+            
+            result = (BigInt(el1) / BigInt(el2)).toString();
+            expected = std::to_string((el1 / el2));
+            std::cout <<  el1 << " / " << el2 << " = " << result << " \t\t expected: " << expected << std::endl;
+            assert(result == expected);
+        }
     }
 
-    BigInt fifth = (first + second);
-    BigInt sixth = (1 + second);
-    BigInt seventh(string("25"));
-    seventh %= string("4");
+    std::vector<long long> vec2{1, 2, 3, 4};
 
-
-	cout << 
-    "first = " << first << endl << 
-    "second = " << second << endl << 
-    "third = " << third << endl << 
-    "forth = " << forth << endl << 
-    "fifth = " << fifth << endl << 
-    "sixth = " << sixth << endl <<
-    "seventh = " << (seventh <= first) << endl << 
-    endl;
+    for (auto el1 : vec2)
+    {
+        for (auto el2 : vec2)
+        {
+            int a = pow(el1, el2);
+            result = (BigInt(el1) ^ BigInt(el2)).toString();
+            expected = std::to_string(a);
+            std::cout <<  el1 << "^" << el2 << " = " << result << " \t\t expected: " << expected << std::endl;
+        }
+    }
 
     return 0;
 }
-
