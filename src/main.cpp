@@ -10,13 +10,20 @@ using namespace ACA;
 
 int main()
 {
-
-    long long a_ = 10, b_ = -45254, c_ = 7575, d_ = 24221;
-
-    std::vector<long long> vec{a_, b_, c_, d_};
-
     std::string result;
     std::string expected;
+    
+    BigInt a("123456789");
+    BigInt b("987654321");
+
+    result = (a * b).toString();
+    expected = "121932631112635269";
+
+    if(result==expected){
+        std::cout << "Success!" << std::endl;
+    }
+
+    /* std::vector<long long> vec{10, -45254, 7575, 24221};
 
     for (auto el1 : vec)
     {
@@ -55,7 +62,7 @@ int main()
             expected = std::to_string(a);
             std::cout <<  el1 << "^" << el2 << " = " << result << " \t\t expected: " << expected << std::endl;
         }
-    }
+    } */
 
     return 0;
 }
