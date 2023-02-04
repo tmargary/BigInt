@@ -224,7 +224,7 @@ TEST(BigInt, OpGreaterOrEq)
     BigInt first(string("12345"));
     BigInt second(12345);
 
-    EXPECT_TRUE(first >= first);
+    EXPECT_GE(first, first);
 }
 
 int main(int argc, char **argv)
