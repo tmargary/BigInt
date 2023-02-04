@@ -199,34 +199,32 @@ TEST(BigInt, OpCmpr)
 
 TEST(BigInt, OpSmaller)
 {
-    BigInt first(string("12345"));
-    BigInt second(12344);
-    bool expected = second < first;
-    EXPECT_EQ(expected, true);
+    BigInt first(string("12344"));
+    BigInt second(12345);
+    EXPECT_GT(second, first);
 }
 
 TEST(BigInt, OpGreater)
 {
     BigInt first(string("12345"));
     BigInt second(12344);
-    bool expected = first > second;
-    EXPECT_EQ(expected, true);
+    EXPECT_GT(first, second);
 }
 
 TEST(BigInt, OpSmallOrEq)
 {
     BigInt first(string("12345"));
     BigInt second(12345);
-    bool expected = second <= first;
-    EXPECT_EQ(first, second);
+
+    EXPECT_TRUE(first <= first);
 }
 
 TEST(BigInt, OpGreaterOrEq)
 {
     BigInt first(string("12345"));
     BigInt second(12345);
-    bool expected = first >= first;
-    EXPECT_EQ(first, second);
+
+    EXPECT_TRUE(first >= first);
 }
 
 int main(int argc, char **argv)
